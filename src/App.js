@@ -1,25 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components';
+import Header from "./components/Header/Header";
+import PlaygroundContainer from './components/Playground/PlaygroundContainer';
+import { useSelector } from "react-redux";
+import Bid from './components/Bid/Bid';
 
-function App() {
+const App = () => {
+  const bid = useSelector(s => s.game.bid); // генерируется после клика старт
+
+   // пути картинок для предварительной импорта (браузер закэширует и другие компоненты их получат моментально из кэша)
+   const imagesPath = [
+    './assets/img/mine.webp',
+  ]
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StyledApp className="App">
+
+      { bid && <div className='container'>
+          <Header/>
+          <Bid/>
+          <PlaygroundContainer/>
+        </div>
+      }
+      
+      {imagesPath.map((el, i) => <NotViewImg key={i} imgComponent={require(`${el}`)}/> )}
+
+    </StyledApp>
   );
 }
 
 export default App;
+
+const StyledApp = styled.div`
+  &.App {
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 767px) {
+      padding: 0 15px;
+    }
+  }
+
+  & .container {
+    max-width: 1024px;
+    width: 100%;
+  }
+  
+`
+const NotViewImg = styled.div`
+    position: absolute;
+    background-image: url(${props => props.imgComponent});
+    opacity: 0;
+`
+
