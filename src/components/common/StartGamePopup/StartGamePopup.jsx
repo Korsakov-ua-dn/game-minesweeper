@@ -21,8 +21,9 @@ const StartGamePopup = () => {
                 <div className='popup__background'/>
                 <div className='popup__wrapper'>
                     <p className='game-description'>
+                        <i>Игра "САПЕР".</i>
                         <i>Тебе предстоит разминировать 8 минных полей.</i>
-                        <i>Укажи все числа не кратные номеру мины.</i>
+                        <i>Для этого необходимо указать все числа не кратные номеру мины.</i>
                     </p>
                     <div className='settings-list'>
                         <div data-level="easy" onClick={fieldSelectionHandler} className='settings-list__item'>
