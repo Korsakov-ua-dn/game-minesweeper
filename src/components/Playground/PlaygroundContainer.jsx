@@ -8,7 +8,7 @@ const PlaygroundContainer = () => {
     const activeCeilsList = useSelector(s => s.game.activeCeilsList);
     const correctAnswerList = useSelector(s => s.game.correctAnswerList);
     // console.log("activeCeilsList: ", activeCeilsList);
-    console.log("correctAnswerList: ", correctAnswerList);
+    // console.log("correctAnswerList: ", correctAnswerList);
   
     useEffect(() => {
         if (JSON.stringify(correctAnswerList.sort()) === JSON.stringify(activeCeilsList.sort())) {

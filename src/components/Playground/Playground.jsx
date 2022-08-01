@@ -1,5 +1,5 @@
 import React  from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 import { variables } from "../../utils/variables";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleActiveCeil } from "../../store/reducers/game-reducer";
@@ -10,6 +10,7 @@ const Playground = () => {
     const listOfSteps = useSelector(s => s.game.listOfSteps);
     const activeCeilsList = useSelector(s => s.game.activeCeilsList);
     // console.log("listOfSteps: ", listOfSteps);
+  
 
 // вещаем один обработчик для всех ячеек
     const clickCeilHandler = (e) => {
@@ -38,7 +39,7 @@ const Playground = () => {
 
 export default React.memo(Playground);
 
-const Ceil = ({ number, active }) => {
+const Ceil = React.memo(({ number, active }) => {
     const classN = `${active ? 'active' : ''} table__ceil`
 
     return (
@@ -46,7 +47,7 @@ const Ceil = ({ number, active }) => {
             <strong id={number} className="table__number">{number}</strong>
         </span>
     )
-}
+});
 
 const StyledTable = styled.main`
 &.table {

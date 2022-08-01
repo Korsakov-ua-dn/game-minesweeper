@@ -1,8 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import Header from "./components/Header/Header";
-import PlaygroundContainer from './components/Playground/PlaygroundContainer';
+import PlaygroundContainer from "./components/Playground/PlaygroundContainer";
 import { useSelector } from "react-redux";
-import Bid from './components/Bid/Bid';
+import StartGamePopup from "./components/StartGame/StartGamePopup";
+import YouWinPopup from "./components/YouWin/YouWinPopup";
+import YouLosePopup from "./components/YouLose/YouLosePopup";
+import Timer from "./components/Timer/Timer";
 
 const App = () => {
   const bid = useSelector(s => s.game.bid); // генерируется после клика старт
@@ -15,14 +18,18 @@ const App = () => {
   return (
     <StyledApp className="App">
 
-      { bid && <div className='container'>
+      { bid && <div className="container">
           <Header/>
-          <Bid/>
+          <Timer/>
           <PlaygroundContainer/>
         </div>
       }
       
       {imagesPath.map((el, i) => <NotViewImg key={i} imgComponent={require(`${el}`)}/> )}
+
+      <StartGamePopup/>
+      <YouWinPopup/>
+      <YouLosePopup/>
 
     </StyledApp>
   );

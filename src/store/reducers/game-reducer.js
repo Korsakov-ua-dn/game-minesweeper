@@ -4,6 +4,7 @@ import { getSteps } from "../../utils/getSteps";
 const initialState = {
     isOpenStart: true,
     isWinView: false,
+    isLoseView: false,
     activeCeilsList: [],
     bid: null,
     listOfSteps: [],
@@ -22,6 +23,7 @@ export const gameReducer = (state = initialState, action) => {
       case "GAME/SET_LEVEL":
       case "GAME/SET_STEPS":
       case "GAME/VIEW_WIN":
+      case "GAME/VIEW_LOSE":
       case "GAME/SET_CORRECT-ANSWER_LIST":
       case "GAME/SET_OPEN_START":
       case "GAME/SET_DISABLE":
@@ -64,6 +66,11 @@ export const setSteps = (listOfSteps) => ({
 export const viewWin = (isWinView) => ({
     type: "GAME/VIEW_WIN",
     payload: { isWinView },
+  });
+
+export const viewLose = (isLoseView) => ({
+    type: "GAME/VIEW_LOSE",
+    payload: { isLoseView },
   });
 
 export const setOpenStart = (isOpenStart) => ({
@@ -109,6 +116,7 @@ export const pressStartTC = (bid = 2) => (dispatch) => {
 
 };
 
+// настройки сложности игры
 export const addGameParamsTC = () => (dispatch, getState) => {
   const level = getState().game.level;
   let gameParams = {
@@ -125,7 +133,7 @@ export const addGameParamsTC = () => (dispatch, getState) => {
       gameParams = {...gameParams, aspectRatio: 4, timer: 2};
       break;
     case "extra hard": 
-      gameParams = { aspectRatio: 4, timer: 2, bidCoefficient: 2};
+      gameParams = { aspectRatio: 4, timer: 1.5, bidCoefficient: 2};
       break;
     default: gameParams = {...gameParams};
   }
@@ -166,7 +174,18 @@ export const viewWinTC = () => (dispatch, getState) => {
     setTimeout(() => {
       dispatch(viewWin(false))
       dispatch(clearActiveCeil)
-      dispatch(pressStartTC(bid + 1)) // 
+      dispatch(pressStartTC(bid + 1))
     }, 1000)
   }
+};
+
+export const viewLoseTC = () => (dispatch) => {
+  dispatch(setBid(null)); // скроет игровое поле до появления новой ставки
+  dispatch(viewLose(true)) // открывает попап "You WIN"
+ 
+  setTimeout(() => {
+    dispatch(viewLose(false))
+    dispatch(clearActiveCeil) // очистит список активных ячеек
+    dispatch(setOpenStart(true)) // открывает стартовое диалоговое окно игры
+  }, 2000)
 };

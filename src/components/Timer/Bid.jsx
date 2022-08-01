@@ -24,7 +24,6 @@ export default React.memo(Bid);
 const StyledBid = styled.div`
 &.mine {
     position: relative;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,8 +31,8 @@ const StyledBid = styled.div`
 }
 
 & .mine__img {
-    max-height: 150px;
-    transform: translateX(39px);
+    max-height: 120px;
+    transform: translateX(28px);
 
     // @media (max-width: 767px) {
     //     font-size: 40px;
@@ -42,7 +41,9 @@ const StyledBid = styled.div`
 
 & .mine__number {
     position: absolute;
-    bottom: 24px;
+    left: 50%;
+    transform: translateX(calc(-50% - 4px));
+    bottom: 14px;
     width: 45px;
     height: 45px;
     display: flex;
