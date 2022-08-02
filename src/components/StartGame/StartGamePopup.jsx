@@ -20,26 +20,26 @@ const StartGamePopup = () => {
         <Popup>
             <StyledContent className="start">
                 <p className='start__description'>
-                    <i>Игра "САПЕР".</i>
+                    <i className="start__title">Игра "САПЕР".</i>
                     <i>Тебе предстоит разминировать 8 минных полей.</i>
                     <i>Для этого необходимо указать все числа не кратные номеру мины.</i>
                 </p>
                 <div className='start__settings list'>
                     <div data-level="easy" onClick={fieldSelectionHandler} className='list__item'>
                         <input type="radio" name="settings" checked={level === 'easy'} readOnly />
-                        <label htmlFor="date">Easy</label>
+                        <label htmlFor="date">Ребенок</label>
                     </div>
                     <div data-level="medium" onClick={fieldSelectionHandler} className='list__item'>
                         <input type="radio" name="settings" checked={level === 'medium'} readOnly />
-                        <label htmlFor="name">Medium</label>
+                        <label htmlFor="name">Подросток</label>
                     </div>
                     <div data-level="hard" onClick={fieldSelectionHandler} className='list__item'>
                         <input type="radio" name="settings" checked={level === 'hard'} readOnly />
-                        <label htmlFor="amount">Hard</label>
+                        <label htmlFor="amount">Студент</label>
                     </div>
                     <div data-level="extra hard" onClick={fieldSelectionHandler} className='list__item'>
                         <input type="radio" name="settings" checked={level === 'extra hard'} readOnly />
-                        <label htmlFor="amount">Extra Hard</label>
+                        <label htmlFor="amount">Взрослый</label>
                     </div>
                 </div>
                 <button onClick={() => dispatch(pressStartTC())} className='start__btn'>СТАРТ</button>
@@ -60,9 +60,13 @@ const StyledContent = styled.div`
     display: flex;
     flex-direction: column;
 
-    & i:not(:last-child) {
-        margin-bottom: px;
-    }
+    // & i:not(:last-child) {
+    //     margin-bottom: px;
+    // }
+}
+
+& .start__title {
+    text-align: center;
 }
 
 & .start__settings {

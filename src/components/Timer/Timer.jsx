@@ -23,6 +23,7 @@ const StyledTimer = styled.div`
     max-width: calc(500 * 100vh / 868);
     width: 100%;
     margin: auto;
+    margin-top: 20px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;

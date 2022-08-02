@@ -27,10 +27,12 @@ const Playground = () => {
             onClick={clickCeilHandler} 
             className={` table`}>
         
-            {  listOfSteps.map(number => <Ceil 
-                                            number={number}
-                                            active={activeCeilsList.find(id => id === number)}
-                                            key={number}/>) }
+            {  
+                listOfSteps.map(number => <Ceil 
+                    number={number}
+                    active={activeCeilsList.find(id => id === number)}
+                    key={number}/>)
+            }
             
         </StyledTable>
     )
@@ -54,7 +56,7 @@ const StyledTable = styled.main`
     grid-template-columns: repeat(${props => props.aspectRatio}, 1fr);
     gap: 20px;
     max-width: calc(500 * 100vh / 868);
-    margin: 30px auto;
+    margin: 20px auto;
 }
 
 & .table__ceil {

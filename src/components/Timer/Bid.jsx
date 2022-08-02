@@ -9,8 +9,8 @@ const Bid = () => {
     return (
         <StyledBid className='mine'>
             <img 
-                // width={100}
-                // height={100}
+                width={150}
+                height={120}
                 src={mineImg}
                 className='mine__img'
                 alt={`mine with number ${bid}`}/>
@@ -27,7 +27,6 @@ const StyledBid = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px 0;
 }
 
 & .mine__img {
