@@ -18,7 +18,6 @@ const Playground = () => {
 
             let id = Number(e.target.id)
             dispatch(toggleActiveCeil(id));
-
         }
     }
 

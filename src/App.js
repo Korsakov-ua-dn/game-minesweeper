@@ -1,29 +1,26 @@
 import styled from "styled-components";
 import Header from "./components/Header/Header";
-import PlaygroundContainer from "./components/Playground/PlaygroundContainer";
+import GameController from "./components/Playground/GameController";
 import { useSelector } from "react-redux";
 import StartGamePopup from "./components/StartGame/StartGamePopup";
 import YouWinPopup from "./components/YouWin/YouWinPopup";
 import YouLosePopup from "./components/YouLose/YouLosePopup";
-import Timer from "./components/Timer/Timer";
 
 const App = () => {
   const bid = useSelector(s => s.game.bid); // генерируется после клика старт
 
-   // пути картинок для предварительной импорта (браузер закэширует и другие компоненты их получат моментально из кэша)
-   const imagesPath = [
+  // пути картинок для предварительной импорта (браузер закэширует и другие компоненты их получат моментально из кэша)
+  const imagesPath = [
     './assets/img/mine.webp',
   ]
 
   return (
     <StyledApp className="App">
 
-      { bid && <div className="container">
-          <Header/>
-          <Timer/>
-          <PlaygroundContainer/>
-        </div>
-      }
+      <div className="container">
+        <Header/>
+        { bid && <GameController/> }
+      </div>
       
       {imagesPath.map((el, i) => <NotViewImg key={i} imgComponent={require(`${el}`)}/> )}
 

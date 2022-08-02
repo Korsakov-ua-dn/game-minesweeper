@@ -1,6 +1,7 @@
 import { getRandomInt } from "./getRandomInt"
+import { shuffle } from "./shuffle"
 
-export const getSteps = (aspectRatio, bid, bidCoefficient) => {
+export const getSteps = (aspectRatio, bid, сoefficient) => {
     let multiple = new Set();
     let notMultiple = new Set();
 
@@ -11,7 +12,7 @@ export const getSteps = (aspectRatio, bid, bidCoefficient) => {
     // генерируем набор уникальных значений в заданном диапозоне
     while (multiple.size < multipleMaxSize || notMultiple.size < notMultipleMaxSize) {
         // debugger
-        const nextStep = getRandomInt(bid, bid*10*bidCoefficient)
+        const nextStep = getRandomInt(bid, bid*10*сoefficient)
 
         if (nextStep % bid && notMultiple.size < notMultipleMaxSize) notMultiple.add(nextStep)
         if (!(nextStep % bid) && multiple.size < multipleMaxSize) multiple.add(nextStep)
@@ -24,14 +25,3 @@ export const getSteps = (aspectRatio, bid, bidCoefficient) => {
 
     return result
 }
-
-
-// рандомно перемешивает значения в массиве
-function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1)); // случайный индекс от 0 до i
-  
-      // меняет элементы местами
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  }

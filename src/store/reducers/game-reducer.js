@@ -12,8 +12,8 @@ const initialState = {
     level: "easy",
     gameParams: {
       aspectRatio: null,
-      timer: null,
-      bidCoefficient: null,
+      delay: null,
+      сoefficient: null,
     },
   };
 
@@ -96,7 +96,6 @@ export const toggleActiveCeil = (ceilId) => ({
   });
   
 //thunk
-
 export const pressStartTC = (bid = 2) => (dispatch) => {
   // закрываем модалку
   dispatch(setOpenStart(false));
@@ -116,24 +115,24 @@ export const pressStartTC = (bid = 2) => (dispatch) => {
 
 };
 
-// настройки сложности игры
 export const addGameParamsTC = () => (dispatch, getState) => {
   const level = getState().game.level;
+  // настройки сложности игры
   let gameParams = {
-    aspectRatio: 3,
-    timer: 3,
-    bidCoefficient: 1,
+    aspectRatio: 3, // соотношение сторон игрового поля
+    delay: 3, // задержка до взрыва в минутах
+    сoefficient: 1, // коэффициент увеличивающий игровые числа
   }
 
   switch (level) {
     case "medium": 
-      gameParams = {...gameParams, timer: 2};
+      gameParams = {...gameParams, delay: 2};
       break;
     case "hard": 
-      gameParams = {...gameParams, aspectRatio: 4, timer: 2};
+      gameParams = {...gameParams, aspectRatio: 4, delay: 2};
       break;
     case "extra hard": 
-      gameParams = { aspectRatio: 4, timer: 1.5, bidCoefficient: 2};
+      gameParams = { aspectRatio: 4, delay: 1.5, сoefficient: 2};
       break;
     default: gameParams = {...gameParams};
   }
@@ -144,10 +143,10 @@ export const addGameParamsTC = () => (dispatch, getState) => {
 export const addListOfStepsTC = () => (dispatch, getState) => {
   const bid = getState().game.bid;
   const aspectRatio = getState().game.gameParams.aspectRatio;
-  const bidCoefficient = getState().game.gameParams.bidCoefficient;
+  const сoefficient = getState().game.gameParams.сoefficient;
 
   // получаю рандомно сгенерированный набор уникальных значений в заданном диапозоне (new Set)
-  const listOfSteps = getSteps(aspectRatio, bid, bidCoefficient)
+  const listOfSteps = getSteps(aspectRatio, bid, сoefficient)
   dispatch(setSteps([...listOfSteps]));
 
 };
@@ -166,7 +165,7 @@ export const viewWinTC = () => (dispatch, getState) => {
 
   if (bid === 9) {
     setTimeout(() => {
-      dispatch(viewWin(false))
+      dispatch(viewWin(false))  
       dispatch(clearActiveCeil) // очистит список активных ячеек
       dispatch(setOpenStart(true)) // открывает стартовое диалоговое окно игры
     }, 1000)
@@ -180,12 +179,21 @@ export const viewWinTC = () => (dispatch, getState) => {
 };
 
 export const viewLoseTC = () => (dispatch) => {
-  dispatch(setBid(null)); // скроет игровое поле до появления новой ставки
-  dispatch(viewLose(true)) // открывает попап "You WIN"
+  const aud = new Audio();
+  aud.src = '/boom.mp3';
+  aud.play()
+
+  setTimeout(() => {
+    dispatch(setBid(null)); // скроет игровое поле до появления новой ставки
+  }, 0)
  
+  setTimeout(() => {
+    dispatch(viewLose(true)) // открывает попап "You WIN"
+  }, 1000)
+
   setTimeout(() => {
     dispatch(viewLose(false))
     dispatch(clearActiveCeil) // очистит список активных ячеек
     dispatch(setOpenStart(true)) // открывает стартовое диалоговое окно игры
-  }, 2000)
+  }, 3000)
 };

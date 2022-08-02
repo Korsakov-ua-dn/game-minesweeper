@@ -1,31 +1,9 @@
-import React, { useEffect, useRef, useState }  from "react";
+import React from "react";
 import styled from "styled-components";
 import { variables } from "../../utils/variables";
-import { useSelector, useDispatch } from "react-redux";
-import { viewLoseTC } from "../../store/reducers/game-reducer";
 import Bid from "./Bid";
 
-const Timer = () => {
-    const dispatch = useDispatch();
-    const timer = useSelector(s => s.game.gameParams.timer);
-    const endTime = useRef(new Date().getTime() + timer*1000*60) // конвертирую минуты в ms
-
-    const [minutes, setMinutes] = useState(Math.floor(timer));
-    const [seconds, setSeconds] = useState(Math.floor(timer*60 % 60));
-    
-    useEffect(() => {
-        const t = endTime.current - new Date().getTime()
-
-        const minutes = Math.floor( t/1000/60 );
-        const seconds = Math.floor( t/1000 % 60 ); // получаю остаток от деления
-       
-        if (minutes + seconds < 0) dispatch(viewLoseTC())
-        else setTimeout(() => {
-            setMinutes(minutes)
-            setSeconds(seconds)
-        }, 1000)
-
-    }, [minutes, seconds, dispatch])
+const Timer = ({ minutes, seconds}) => {
 
     const classN = `${minutes === 0 && seconds < 31 ? "dangerous" : ""}`
 
