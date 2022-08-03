@@ -32,10 +32,6 @@ const StyledBid = styled.div`
 & .mine__img {
     max-height: 120px;
     transform: translateX(28px);
-
-    // @media (max-width: 767px) {
-    //     font-size: 40px;
-    //   }
 }
 
 & .mine__number {
@@ -50,6 +46,7 @@ const StyledBid = styled.div`
     align-items: center;
     font-size: 36px;
     font-weight: 700;
+    border: 1px solid black;
     border-radius: 50%;
     background-color: #fff;
 }

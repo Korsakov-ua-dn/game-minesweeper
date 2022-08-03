@@ -60,9 +60,9 @@ const StyledContent = styled.div`
     display: flex;
     flex-direction: column;
 
-    // & i:not(:last-child) {
-    //     margin-bottom: px;
-    // }
+    & i:not(:last-child) {
+        margin-bottom: px;
+    }
 }
 
 & .start__title {
