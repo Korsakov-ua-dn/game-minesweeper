@@ -1,7 +1,7 @@
 import React  from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { pressStartTC, setLevel } from "../../store/reducers/game-reducer";
+import { pressStart, setLevel } from "../../store/reducers/game-reducer";
 import { variables } from "../../utils/variables";
 import Popup from "../common/Popup";
 
@@ -42,7 +42,7 @@ const StartGamePopup = () => {
                         <label htmlFor="amount">Взрослый</label>
                     </div>
                 </div>
-                <button onClick={() => dispatch(pressStartTC())} className='start__btn'>СТАРТ</button>
+                <button onClick={() => dispatch(pressStart())} className='start__btn'>СТАРТ</button>
             </StyledContent>
         </Popup>
     )

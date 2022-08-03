@@ -48,6 +48,10 @@ export const gameReducer = (state = initialState, action) => {
   };
 
 //actions
+export const pressStart = () => ({
+  type: "GAME/PRESS_START",
+});
+
 export const setLevel = (level) => ({
     type: "GAME/SET_LEVEL",
     payload: { level },
