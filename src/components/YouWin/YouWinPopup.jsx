@@ -13,7 +13,8 @@ const YouWinPopup = () => {
     return (
         <Popup>
             <StyledContent className='win'>
-                YOU WIN!
+                 <span className="win__title">Ты победил!</span>
+                 <button>Следующий уровень</button>
             </StyledContent>
         </Popup>
     )
