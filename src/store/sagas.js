@@ -67,7 +67,7 @@ export function* winWorker() {
   const bid = yield select(state => state.game.bid)
   yield put(setBid(null)) // скроет игровое поле
   yield put(viewWin(true))
-  yield put(clearActiveCeil) // очистит список активных ячеек
+  yield put(clearActiveCeil()) // очистит список активных ячеек
 
   if (bid === 9) {
     yield call(delay, 2000)
@@ -94,7 +94,7 @@ export function* LoseWorker() {
 
   yield call(delay, 2000)
   yield put(viewLose(false))
-  yield put(clearActiveCeil) // очистит список активных ячеек
+  yield put(clearActiveCeil()) // очистит список активных ячеек
   yield put(viewStart(true)) // открывает стартовое диалоговое окно игры
 }
 

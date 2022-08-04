@@ -33,22 +33,24 @@ const StyledContent = styled.div`
     width: 100%;
     padding: 10px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    
 }
 
 & .win__title {
     font-size: 36px;
     font-weight: 700;
     letter-spacing: 1.5px;
-    color: ${variables.blueColor}
+    color: ${variables.blueColor};
+    margin-bottom: 10px;
 }
 
 & .win__btn {
+    border: 1px solid ${variables.blueColor};
+    border-radius: 4px;
+    padding: 5px 10px;
     font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    color: ${variables.blueColor}
+    color: ${variables.blueColor};
 }
 `
