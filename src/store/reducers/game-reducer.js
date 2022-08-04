@@ -19,13 +19,14 @@ const initialState = {
 
 export const gameReducer = (state = initialState, action) => {
     switch (action.type) {
+      case "GAME/PRESS_START":
       case "GAME/SET_BID":
       case "GAME/SET_LEVEL":
       case "GAME/SET_STEPS":
       case "GAME/VIEW_WIN":
       case "GAME/VIEW_LOSE":
       case "GAME/SET_CORRECT-ANSWER_LIST":
-      case "GAME/SET_OPEN_START":
+      case "GAME/VIEW_START":
       case "GAME/SET_DISABLE":
       case "GAME/SET_GAME_PARAMS":
         return { ...state, ...action.payload };
@@ -48,8 +49,21 @@ export const gameReducer = (state = initialState, action) => {
   };
 
 //actions
-export const pressStart = () => ({
+export const pressStart = (bid = 2) => ({
   type: "GAME/PRESS_START",
+  payload: { bid }
+});
+
+export const win = () => ({
+  type: "GAME/WIN",
+});
+
+export const lose = () => ({
+  type: "GAME/LOSE",
+});
+
+export const nextRound = () => ({
+  type: "GAME/NEXT_ROUND",
 });
 
 export const setLevel = (level) => ({
@@ -77,8 +91,8 @@ export const viewLose = (isLoseView) => ({
     payload: { isLoseView },
   });
 
-export const setOpenStart = (isOpenStart) => ({
-    type: "GAME/SET_OPEN_START",
+export const viewStart = (isOpenStart) => ({
+    type: "GAME/VIEW_START",
     payload: { isOpenStart },
   });
 
@@ -102,7 +116,7 @@ export const toggleActiveCeil = (ceilId) => ({
 //thunk
 export const pressStartTC = (bid = 2) => (dispatch) => {
   // закрываем модалку
-  dispatch(setOpenStart(false));
+  dispatch(viewStart(false));
 
   // выставляем настройки игры соответственно уровню сложности
   dispatch(addGameParamsTC());
@@ -171,7 +185,7 @@ export const viewWinTC = () => (dispatch, getState) => {
     setTimeout(() => {
       dispatch(viewWin(false))  
       dispatch(clearActiveCeil) // очистит список активных ячеек
-      dispatch(setOpenStart(true)) // открывает стартовое диалоговое окно игры
+      dispatch(viewStart(true)) // открывает стартовое диалоговое окно игры
     }, 1000)
   } else {
     setTimeout(() => {
@@ -192,12 +206,12 @@ export const viewLoseTC = () => (dispatch) => {
   }, 0)
  
   setTimeout(() => {
-    dispatch(viewLose(true)) // открывает попап "You WIN"
+    dispatch(viewLose(true)) // открывает попап "You Lose"
   }, 1000)
 
   setTimeout(() => {
     dispatch(viewLose(false))
     dispatch(clearActiveCeil) // очистит список активных ячеек
-    dispatch(setOpenStart(true)) // открывает стартовое диалоговое окно игры
+    dispatch(viewStart(true)) // открывает стартовое диалоговое окно игры
   }, 3000)
 };

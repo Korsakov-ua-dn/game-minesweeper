@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { viewWinTC, viewLoseTC } from "../../store/reducers/game-reducer";
+import { win, lose } from "../../store/reducers/game-reducer";
 import { stringFromArray } from "../../utils/stringFromArray";
 import { useTick } from "../../utils/useTick";
 import Timer from "../Timer/Timer";
@@ -26,11 +26,11 @@ const GameController = () => {
 
         // победа если оба массива с номерами ячеек равны
         if (stringFromArray(correctAnswerList) === stringFromArray(activeCeilsList)) {
-            dispatch(viewWinTC())
+            dispatch(win())
         } else {
             if (minutes === 0 && seconds === 0) clearTick()
             // если время вышло диспатчим проиграл иначе сетаем время которое осталось
-            if (minutes + seconds < 0) dispatch(viewLoseTC()) // "0" показываем на табло
+            if (minutes + seconds < 0) dispatch(lose()) // "0" показываем на табло
 
             else setTimeout(() => {
                 setMinutes(minutes)

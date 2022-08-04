@@ -1,20 +1,24 @@
 
 import React  from "react";
 import Popup from "../common/Popup";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { variables } from "../../utils/variables";
+import { nextRound } from "../../store/reducers/game-reducer";
 
 const YouWinPopup = () => {
+    const dispatch = useDispatch();
     const isWinView = useSelector(s => s.game.isWinView);
 
     if (!isWinView) return;
+
+    const nextRoundHandler = () => dispatch(nextRound())
 
     return (
         <Popup>
             <StyledContent className='win'>
                  <span className="win__title">Ты победил!</span>
-                 <button>Следующий уровень</button>
+                 <button onClick={nextRoundHandler} className="win__btn">Следующий уровень</button>
             </StyledContent>
         </Popup>
     )
@@ -31,7 +35,18 @@ const StyledContent = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 46px;
+    
+}
+
+& .win__title {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: ${variables.blueColor}
+}
+
+& .win__btn {
+    font-size: 16px;
     font-weight: 700;
     letter-spacing: 1.5px;
     color: ${variables.blueColor}
