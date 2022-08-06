@@ -26,7 +26,7 @@ export function* pressStartWorker() {
 
   let gameParams = {
     aspectRatio: 3, // соотношение сторон игрового поля
-    delay: 0.1, // задержка до взрыва в минутах
+    delay: 3, // задержка до взрыва в минутах
     сoefficient: 1, // коэффициент увеличивающий игровые числа
   }
 
