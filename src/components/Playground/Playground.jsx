@@ -1,4 +1,4 @@
-import React  from "react";
+import React, { useCallback }  from "react";
 import styled from "styled-components";
 import { variables } from "../../utils/variables";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,13 +13,13 @@ const Playground = () => {
   
 
 // вещаем один обработчик для всех ячеек
-    const clickCeilHandler = (e) => {
+    const clickCeilHandler = useCallback((e) => {
         if (e.target.tagName === 'STRONG') {
 
             let id = Number(e.target.id)
             dispatch(toggleActiveCeil(id));
         }
-    }
+    }, [dispatch])
 
     return (
         <StyledTable

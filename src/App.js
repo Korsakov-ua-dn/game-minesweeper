@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import StartGamePopup from "./components/StartGame/StartGamePopup";
 import YouWinPopup from "./components/YouWin/YouWinPopup";
 import YouLosePopup from "./components/YouLose/YouLosePopup";
+import { useEffect } from "react";
+import { preloadAudio } from "./utils/preloadAudio"
 
 const App = () => {
   const bid = useSelector(s => s.game.bid); // генерируется после клика старт
@@ -13,6 +15,10 @@ const App = () => {
   const imagesPath = [
     './assets/img/mine.webp',
   ]
+
+  useEffect(() => {
+    preloadAudio();
+  }, [])
 
   return (
     <StyledApp className="App">

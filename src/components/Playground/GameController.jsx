@@ -41,8 +41,6 @@ const GameController = () => {
 
     }, [correctAnswerList, activeCeilsList, minutes, seconds, dispatch, clearTick])
 
-    
-    
     return (
         <>
             <Timer minutes={minutes} seconds={seconds}/>
