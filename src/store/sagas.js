@@ -82,9 +82,9 @@ export function* winWorker() {
 }
 
 export function* LoseWorker() {
-  const aud = new Audio();
-  aud.src = '/boom.mp3';
-  aud.play()
+  // const aud = new Audio();
+  // aud.src = '/boom.mp3';
+  // aud.play()
 
   yield call(delay, 0)
   yield put(setBid(null)); // скроет игровое поле до появления новой ставки
