@@ -6,7 +6,6 @@ import StartGamePopup from "./components/StartGame/StartGamePopup";
 import YouWinPopup from "./components/YouWin/YouWinPopup";
 import YouLosePopup from "./components/YouLose/YouLosePopup";
 import { useEffect } from "react";
-import { preloadAudio } from "./utils/preloadAudio"
 import { preloadSounds } from "./store/reducers/game-reducer";
 
 const App = () => {

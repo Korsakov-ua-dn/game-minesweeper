@@ -1,10 +1,7 @@
-import { Howl } from "howler";
-import { useMemo } from "react";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { win, lose } from "../../store/reducers/game-reducer";
 import { stringFromArray } from "../../utils/stringFromArray";
-import { useTick } from "../../utils/useTick";
 import Timer from "../Timer/Timer";
 import Playground from "./Playground";
 
@@ -14,27 +11,6 @@ const GameController = () => {
   const correctAnswerList = useSelector((s) => s.game.correctAnswerList);
   const delay = useSelector((s) => s.game.gameParams.delay); // задержка до взрыва в минутах
   const { tick, boom } = useSelector((s) => s.game.sounds);
-
-
-  // const tick = useMemo(() => new Howl({
-  //       src: ["tick1s.mp3"],
-  //       // volume: 1,
-  //       loop: true,
-  //       // html5: true,
-  //     }),[]);
-
-  // console.log("tick: ", tick);
-
-  // const IntervalRef = useRef();
-
-  // useEffect(() => {
-  //   IntervalRef.current = setInterval(() => {
-  //     tick.play();
-  //   }, 1000);
-  //   return () => clearInterval(IntervalRef.current);
-  // }, [tick]);
-
-  // const { tick, boom } = useTick();
 
   useEffect(() => {
     tick.play();

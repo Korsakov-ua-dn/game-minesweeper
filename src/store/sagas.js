@@ -111,8 +111,6 @@ export function* SoundsWorker() {
     rate: 1.05,
   })
 
-  console.log("tick: ", tick);
-
   const boom = new Howl({
     src: ["boom.mp3"],
     // volume: 1,
@@ -120,10 +118,7 @@ export function* SoundsWorker() {
     // html5: true,
   })
 
-
-  // yield call(delay, 0)
   yield put(setSounds({tick, boom}));
-  // yield put(setSounds({}));
 }
 
 // watcher Sagas
