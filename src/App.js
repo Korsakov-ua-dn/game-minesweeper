@@ -1,15 +1,17 @@
 import styled from "styled-components";
 import Header from "./components/Header/Header";
 import GameController from "./components/Playground/GameController";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import StartGamePopup from "./components/StartGame/StartGamePopup";
 import YouWinPopup from "./components/YouWin/YouWinPopup";
 import YouLosePopup from "./components/YouLose/YouLosePopup";
 import { useEffect } from "react";
 import { preloadAudio } from "./utils/preloadAudio"
+import { preloadSounds } from "./store/reducers/game-reducer";
 
 const App = () => {
   const bid = useSelector(s => s.game.bid); // генерируется после клика старт
+  const dispatch = useDispatch();
 
   // пути картинок для предварительной импорта (браузер закэширует и другие компоненты их получат моментально из кэша)
   const imagesPath = [
@@ -17,8 +19,8 @@ const App = () => {
   ]
 
   useEffect(() => {
-    preloadAudio();
-  }, [])
+    dispatch(preloadSounds());
+  }, [dispatch])
 
   return (
     <StyledApp className="App">

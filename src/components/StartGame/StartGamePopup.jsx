@@ -9,6 +9,7 @@ const StartGamePopup = () => {
     const dispatch = useDispatch();
     const isOpenStart = useSelector(s => s.game.isOpenStart);
     const level = useSelector(s => s.game.level);
+    const { tick, boom } = useSelector((s) => s.game.sounds);
 
     if (!isOpenStart) return;
 

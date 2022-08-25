@@ -12,7 +12,9 @@ import {
   clearActiveCeil,
   pressStart,
   viewLose,
+  setSounds,
 } from './reducers/game-reducer'
+import { Howl } from 'howler';
 
 
 
@@ -98,6 +100,32 @@ export function* LoseWorker() {
   yield put(viewStart(true)) // открывает стартовое диалоговое окно игры
 }
 
+export function* SoundsWorker() {
+
+  const tick = new Howl({
+    src: ["tick1s.mp3"],
+    // volume: 1,
+    loop: true,
+    // html5: true,
+    // interrupt: true,
+    rate: 1.05,
+  })
+
+  console.log("tick: ", tick);
+
+  const boom = new Howl({
+    src: ["boom.mp3"],
+    // volume: 1,
+    // loop: true,
+    // html5: true,
+  })
+
+
+  // yield call(delay, 0)
+  yield put(setSounds({tick, boom}));
+  // yield put(setSounds({}));
+}
+
 // watcher Sagas
 export function* start() {
   yield takeEvery('GAME/PRESS_START', pressStartWorker)
@@ -111,6 +139,10 @@ export function* lose() {
   yield takeEvery('GAME/LOSE', LoseWorker)
 }
 
+export function* preloadSounds() { 
+  yield takeEvery('GAME/PRELOAD_SOUNDS', SoundsWorker)
+}
+
 // notice how we now only export the rootSaga
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
@@ -118,5 +150,6 @@ export default function* rootSaga() {
     start(),
     win(),
     lose(),
+    preloadSounds(),
   ])
 }
