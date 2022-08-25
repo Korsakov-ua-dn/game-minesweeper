@@ -13,18 +13,10 @@ const GameController = () => {
   const delay = useSelector((s) => s.game.gameParams.delay); // задержка до взрыва в минутах
 
   const { tick, boom } = useTick();
+  
   useEffect(() => {
     tick.play();
   }, [tick]);
-
-  // const IntervalRef = useRef();
-
-    //  useEffect(() => {
-    //       IntervalRef.current = setInterval(() => {
-    //           tick.play()
-    //       }, 1000)
-    //       return () => clearInterval(IntervalRef.current)
-    //   }, [tick])
 
   const endTime = useRef(new Date().getTime() + delay * 1000 * 60); // конвертирую минуты в ms
 
