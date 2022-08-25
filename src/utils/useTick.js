@@ -23,8 +23,8 @@ export const useTick = () => {
   const tick = useMemo(() => {
     const audio = new Audio();
     audio.src = "/tick.mp3";
-    audio.loop = true;
-    audio.playbackRate = 1.1;
+    // audio.loop = true;
+    // audio.playbackRate = 1.13;
     return audio;
   }, []);
 
